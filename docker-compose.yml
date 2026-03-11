@@ -1,28 +1,27 @@
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: sertao-mysql
-    environment:
-      MYSQL_DATABASE: sertao_db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: sertao_user
-      MYSQL_PASSWORD: sertao_password
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-  sertao-api:
-    image: sertao-api
+  app:
+    build: .
     container_name: sertao-api
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://sertao-mysql:3306/sertao_db?allowPublicKeyRetrieval=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: sertao_user
-      SPRING_DATASOURCE_PASSWORD: sertao_password
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      - db
+    env_file:
+      - .env
+    environment:
+      # Sobrescreve a URL para usar o nome do serviço 'db' dentro da rede do Docker
+      - DB_URL=jdbc:mysql://db:3306/${DB_DATABASE}
+
+  db:
+    image: mysql:8.0
+    container_name: sertao-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
 
 volumes:
-  mysql_data:
+  db_data:
