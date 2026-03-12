@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: sertao-api
+    container_name: clinica-sertao-api
     ports:
       - "8080:8080"
     depends_on:
@@ -15,7 +15,7 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: sertao-db
+    container_name: clinica-sertao-db
     ports:
       - "3306:3306"
     environment:

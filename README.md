@@ -1,6 +1,6 @@
-# Sertão API
+# Clinica Médica do Sertão API
 
-Apis da Clínica Médica do Sertão.
+Api's da Clínica Médica do Sertão.
 
 ## Requisitos
 
@@ -13,10 +13,10 @@ A aplicação utiliza um arquivo `.env` na raiz do projeto para gerenciar variá
 Crie um arquivo `.env` baseado no exemplo abaixo:
 
 ```properties
-DB_URL=jdbc:mysql://localhost:3306/sertao_db
+DB_URL=jdbc:mysql://localhost:3306/clinica_sertao_db
 DB_USERNAME=root
 DB_PASSWORD=secret
-DB_DATABASE=sertao_db
+DB_DATABASE=clinica_sertao_db
 ```
 
 ## Como executar com Docker
