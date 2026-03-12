@@ -19,6 +19,14 @@ DB_PASSWORD=secret
 DB_DATABASE=sertao_db
 ```
 
+## Como executar com Docker
+
+Para rodar a aplicação e o banco de dados via Docker, execute o seguinte comando na raiz do projeto:
+
+```bash
+docker-compose up --build
+```
+
 ## Como executar
 
 Para rodar a aplicação, execute o seguinte comando na raiz do projeto:
