@@ -16,8 +16,11 @@ public class MedicoController {
     private MedicoService medicoService;
 
     @GetMapping
-    public ResponseEntity<List<MedicoDTO>> findAll() {
-        List<MedicoDTO> list = medicoService.findAll();
+    public ResponseEntity<List<MedicoResponse>> findAll() {
+        List<MedicoResponse> list = medicoService.findAll()
+                                                .stream()
+                                                .map(MedicoResponse::toResponse)
+                                                .toList();
         return ResponseEntity.ok().body(list);
     }
 

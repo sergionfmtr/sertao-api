@@ -24,7 +24,7 @@ public class MedicoService {
         Medico entity = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Médico não encontrado"));
         return new MedicoDTO(entity);
     }
-
+    
     @Transactional
     public Medico insert(Medico medico) {
         return medicoRepository.save(medico);
