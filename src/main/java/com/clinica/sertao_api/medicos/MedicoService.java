@@ -1,12 +1,8 @@
-package com.clinica.sertao_api;
+package com.clinica.sertao_api.medicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.clinica.sertao_api.medicos.Medico;
-import com.clinica.sertao_api.medicos.MedicoDTO;
-import com.clinica.sertao_api.medicos.MedicoRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,10 +26,8 @@ public class MedicoService {
     }
 
     @Transactional
-    public MedicoDTO insert(MedicoDTO dto) {
-        Medico entity = new Medico(dto);
-        entity = medicoRepository.save(entity);
-        return new MedicoDTO(entity);
+    public Medico insert(Medico medico) {
+        return medicoRepository.save(medico);
     }
     
     @Transactional
