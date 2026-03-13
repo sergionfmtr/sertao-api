@@ -46,8 +46,9 @@ public class MedicoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<MedicoDTO> update(@PathVariable Integer id, @RequestBody MedicoDTO dto) {
+    public ResponseEntity<MedicoResponse> update(@PathVariable Integer id, @RequestBody MedicoRequest request) {
+        MedicoDTO dto = request.toDto();
         dto = medicoService.update(id, dto);
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok().body(MedicoResponse.toResponse(dto));
     }
 }
