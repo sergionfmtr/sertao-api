@@ -31,10 +31,12 @@ public class MedicoController {
     }
 
     @PostMapping
-    public ResponseEntity<Medico> insert(@RequestBody Medico medico) {
-        medico = medicoService.insert(medico);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(medico.getId()).toUri();
-        return ResponseEntity.created(uri).body(medico);
+    public ResponseEntity<MedicoResponse> insert(@RequestBody MedicoRequest request) {
+        MedicoDTO dto = request.toDto();
+        dto = medicoService.insert(dto);
+        
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(MedicoResponse.toResponse(dto));
     }
 
     @DeleteMapping(value = "/{id}")

@@ -23,4 +23,17 @@ public record MedicoResponse(
             dto.getEmail()
         );
     }
+
+    public MedicoDTO toDTO() {
+        // Assumindo que MedicoDTO possui um construtor padrão e setters, 
+        // ou um construtor que aceita estes argumentos.
+        // A implementação abaixo assume um DTO estilo Bean para compatibilidade geral.
+        MedicoDTO dto = new MedicoDTO();
+        dto.setId(this.id());
+        dto.setNome(this.nome());
+        dto.setCrm(this.crm());
+        dto.setTelefone(this.telefone());
+        dto.setEmail(this.email());
+        return dto;
+    }
 }

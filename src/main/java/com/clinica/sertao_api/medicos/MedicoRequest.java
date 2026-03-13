@@ -6,4 +6,12 @@ public record MedicoRequest(
     String telefone,
     String email
 ) {
+    public MedicoDTO toDto() {
+        MedicoDTO dto = new MedicoDTO();
+        dto.setNome(this.nome());
+        dto.setCrm(this.crm());
+        dto.setTelefone(this.telefone());
+        dto.setEmail(this.email());
+        return dto;
+    }
 }

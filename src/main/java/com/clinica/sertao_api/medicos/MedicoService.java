@@ -26,8 +26,10 @@ public class MedicoService {
     }
     
     @Transactional
-    public Medico insert(Medico medico) {
-        return medicoRepository.save(medico);
+    public MedicoDTO insert(MedicoDTO dto) {
+        Medico entity = new Medico(dto);
+        entity = medicoRepository.save(entity);
+        return new MedicoDTO(entity);
     }
     
     @Transactional
