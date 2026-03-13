@@ -35,7 +35,7 @@ public class MedicoController {
         MedicoDTO dto = request.toMedicoDto();
         dto = medicoService.insert(dto);
         
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.id()).toUri();
         return ResponseEntity.created(uri).body(MedicoResponse.toResponse(dto));
     }
 

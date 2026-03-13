@@ -7,11 +7,12 @@ public record MedicoRequest(
     String email
 ) {
     public MedicoDTO toMedicoDto() {
-        MedicoDTO dto = new MedicoDTO();
-        dto.setNome(this.nome());
-        dto.setCrm(this.crm());
-        dto.setTelefone(this.telefone());
-        dto.setEmail(this.email());
-        return dto;
+        return new MedicoDTO(
+            null,
+            this.nome(),
+            this.crm(),
+            this.telefone(),
+            this.email()
+        );
     }
 }

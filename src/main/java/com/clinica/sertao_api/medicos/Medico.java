@@ -35,10 +35,10 @@ public class Medico {
     private String email;
 
     public Medico(MedicoDTO dto) {
-        this.id = dto.getId();
-        this.nome = dto.getNome();
-        this.crm = dto.getCrm();
-        this.telefone = dto.getTelefone();
-        this.email = dto.getEmail();
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.crm = dto.crm();
+        this.telefone = dto.telefone();
+        this.email = dto.email();
     }
 }

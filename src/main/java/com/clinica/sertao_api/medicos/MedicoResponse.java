@@ -16,21 +16,21 @@ public record MedicoResponse(
             return null;
         }
         return new MedicoResponse(
-            dto.getId(),
-            dto.getNome(),
-            dto.getCrm(),
-            dto.getTelefone(),
-            dto.getEmail()
+            dto.id(),
+            dto.nome(),
+            dto.crm(),
+            dto.telefone(),
+            dto.email()
         );
     }
 
     public MedicoDTO toMedicoDTO() {
-       MedicoDTO dto = new MedicoDTO();
-        dto.setId(this.id());
-        dto.setNome(this.nome());
-        dto.setCrm(this.crm());
-        dto.setTelefone(this.telefone());
-        dto.setEmail(this.email());
-        return dto;
+        return new MedicoDTO(
+            this.id(),
+            this.nome(),
+            this.crm(),
+            this.telefone(),
+            this.email()
+        );
     }
 }
