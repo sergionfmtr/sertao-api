@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EspecialidadeService {
@@ -12,8 +13,10 @@ public class EspecialidadeService {
     @Autowired
     private EspecialidadeRepository repository;
 
-    public List<Especialidade> listarTodas() {
-        return repository.findAll();
+    public List<EspecialidadeDTO> findAll() {
+        return repository.findAll().stream()
+                .map(EspecialidadeDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Optional<Especialidade> buscarPorId(Long id) {

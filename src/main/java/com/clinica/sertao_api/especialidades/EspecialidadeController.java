@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/especialidades")
@@ -19,8 +20,11 @@ public class EspecialidadeController {
 
     @GetMapping
     @Operation(summary = "Listar todas as especialidades", description = "Retorna uma lista com todas as especialidades cadastradas")
-    public List<Especialidade> listar() {
-        return service.listarTodas();
+    public ResponseEntity<List<EspecialidadeResponse>> findAll() {
+        List<EspecialidadeResponse> especialidades = service.findAll().stream()
+                .map(EspecialidadeResponse::toResponse) 
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(especialidades);
     }
 
     @GetMapping("/{id}")
