@@ -19,8 +19,8 @@ public class EspecialidadeService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Especialidade> buscarPorId(Long id) {
-        return repository.findById(id);
+    public Optional<EspecialidadeDTO> findById(Long id) {
+        return repository.findById(id).map(EspecialidadeDTO::new);
     }
 
     public Especialidade salvar(Especialidade especialidade) {

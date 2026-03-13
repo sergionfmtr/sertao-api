@@ -29,8 +29,9 @@ public class EspecialidadeController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar especialidade por ID", description = "Retorna uma especialidade específica baseada no ID fornecido")
-    public ResponseEntity<Especialidade> buscar(@PathVariable Long id) {
-        return service.buscarPorId(id)
+    public ResponseEntity<EspecialidadeResponse> buscar(@PathVariable Long id) {
+        return service.findById(id)
+                .map(EspecialidadeResponse::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
