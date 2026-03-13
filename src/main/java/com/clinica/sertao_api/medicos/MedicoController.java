@@ -25,9 +25,9 @@ public class MedicoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<MedicoDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<MedicoResponse> findById(@PathVariable Integer id) {
         MedicoDTO dto = medicoService.findById(id);
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok().body(MedicoResponse.toResponse(dto));
     }
 
     @PostMapping
