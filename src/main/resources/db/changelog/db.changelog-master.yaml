@@ -1,4 +1,5 @@
 databaseChangeLog:
   - include:
       file: classpath:db/changes/001-cria-tabela-especialidade.sql
+  - include:
       file: classpath:db/changes/002-cria-tabela-medico.sql
