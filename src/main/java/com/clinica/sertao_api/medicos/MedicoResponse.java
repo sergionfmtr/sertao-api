@@ -24,11 +24,8 @@ public record MedicoResponse(
         );
     }
 
-    public MedicoDTO toDTO() {
-        // Assumindo que MedicoDTO possui um construtor padrão e setters, 
-        // ou um construtor que aceita estes argumentos.
-        // A implementação abaixo assume um DTO estilo Bean para compatibilidade geral.
-        MedicoDTO dto = new MedicoDTO();
+    public MedicoDTO toMedicoDTO() {
+       MedicoDTO dto = new MedicoDTO();
         dto.setId(this.id());
         dto.setNome(this.nome());
         dto.setCrm(this.crm());

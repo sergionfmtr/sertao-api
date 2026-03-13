@@ -6,7 +6,7 @@ public record MedicoRequest(
     String telefone,
     String email
 ) {
-    public MedicoDTO toDto() {
+    public MedicoDTO toMedicoDto() {
         MedicoDTO dto = new MedicoDTO();
         dto.setNome(this.nome());
         dto.setCrm(this.crm());

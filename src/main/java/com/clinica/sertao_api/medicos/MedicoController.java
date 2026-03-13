@@ -32,7 +32,7 @@ public class MedicoController {
 
     @PostMapping
     public ResponseEntity<MedicoResponse> insert(@RequestBody MedicoRequest request) {
-        MedicoDTO dto = request.toDto();
+        MedicoDTO dto = request.toMedicoDto();
         dto = medicoService.insert(dto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -47,7 +47,7 @@ public class MedicoController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<MedicoResponse> update(@PathVariable Integer id, @RequestBody MedicoRequest request) {
-        MedicoDTO dto = request.toDto();
+        MedicoDTO dto = request.toMedicoDto();
         dto = medicoService.update(id, dto);
         return ResponseEntity.ok().body(MedicoResponse.toResponse(dto));
     }
