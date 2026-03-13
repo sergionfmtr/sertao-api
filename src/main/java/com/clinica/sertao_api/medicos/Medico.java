@@ -1,18 +1,24 @@
 package com.clinica.sertao_api.medicos;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.clinica.sertao_api.especialidades.Especialidade;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "medico")
 public class Medico {
@@ -33,6 +39,14 @@ public class Medico {
 
     @Column(length = 100, unique = true)
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+        name = "medico_especialidade",
+        joinColumns = @JoinColumn(name = "id_medico"),
+        inverseJoinColumns = @JoinColumn(name = "id_especialidade")
+    )
+    private Set<Especialidade> especialidades = new HashSet<>();
 
     public Medico(MedicoDTO dto) {
         this.id = dto.id();
