@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset unifametro:1
 -- 1. Tabela de Médicos (com dados de contato e registro)
-CREATE TABLE Medico (
+CREATE TABLE medico (
     id_medico INT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     crm VARCHAR(20) UNIQUE NOT NULL,
