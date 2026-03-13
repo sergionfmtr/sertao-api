@@ -27,6 +27,12 @@ Para rodar a aplicação e o banco de dados via Docker, execute o seguinte coman
 docker-compose up --build
 ```
 
+Para limpar os volumes e remover a base de dados atual.
+
+```bash
+docker compose down -v
+```
+
 ## Como executar
 
 Para rodar a aplicação, execute o seguinte comando na raiz do projeto:
