@@ -5,3 +5,5 @@ databaseChangeLog:
       file: classpath:db/changes/002-cria-tabela-medico.sql
   - include:
       file: classpath:db/changes/003-cria-tabela-medico-especialidade.sql
+  - include:
+      file: classpath:db/changes/004-cria-tabela-paciente.sql
