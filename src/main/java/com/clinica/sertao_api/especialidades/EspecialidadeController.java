@@ -47,7 +47,7 @@ public class EspecialidadeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar especialidade", description = "Atualiza os dados de uma especialidade existente")
-    public ResponseEntity<EspecialidadeResponse> atualizar(@PathVariable Long id, @RequestBody EspecialidadeRequest request) {
+    public ResponseEntity<EspecialidadeResponse> update(@PathVariable Long id, @RequestBody EspecialidadeRequest request) {
         return service.update(id, request.toEspecialidadeDto())
                 .map(EspecialidadeResponse::toResponse)
                 .map(ResponseEntity::ok)
@@ -56,7 +56,7 @@ public class EspecialidadeController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar especialidade", description = "Remove uma especialidade do sistema")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
