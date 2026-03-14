@@ -57,7 +57,7 @@ public class EspecialidadeController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar especialidade", description = "Remove uma especialidade do sistema")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        service.deletar(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
