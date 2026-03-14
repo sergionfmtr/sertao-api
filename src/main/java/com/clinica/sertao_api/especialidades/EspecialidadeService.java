@@ -42,7 +42,7 @@ public class EspecialidadeService {
         return Optional.empty();
     }
 
-    public void deletar(Long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 }
