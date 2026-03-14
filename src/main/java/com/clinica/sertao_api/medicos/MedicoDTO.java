@@ -1,5 +1,7 @@
 package com.clinica.sertao_api.medicos;
 
+import com.clinica.sertao_api.especialidades.EspecialidadeDTO;
+
 import java.util.List;
 
 public record MedicoDTO(
@@ -8,7 +10,7 @@ public record MedicoDTO(
     String crm,
     String telefone,
     String email,
-    List<Long> especialidades
+    List<EspecialidadeDTO> especialidades
 ) {
     public MedicoDTO(Medico medico) {
         this(
@@ -17,7 +19,7 @@ public record MedicoDTO(
             medico.getCrm(),
             medico.getTelefone(),
             medico.getEmail(),
-            (medico.getEspecialidades() != null ? medico.getEspecialidades().stream().map(e -> e.getId()).toList() : null)
+            (medico.getEspecialidades() != null ? medico.getEspecialidades().stream().map(EspecialidadeDTO::new).toList() : null)
         );
     }
 }

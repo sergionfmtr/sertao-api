@@ -20,7 +20,7 @@ public class MedicoService {
 
     @Transactional(readOnly = true)
     public List<MedicoDTO> findAll() {
-        List<Medico> result = medicoRepository.findAll();
+        List<Medico> result = medicoRepository.findAllWithEspecialidades();
         return result.stream().map(MedicoDTO::new).collect(Collectors.toList());
     }
 
@@ -55,7 +55,8 @@ public class MedicoService {
 
         entity.getEspecialidades().clear();
         if (dto.especialidades() != null && !dto.especialidades().isEmpty()) {
-            List<Especialidade> especialidades = especialidadeRepository.findAllById(dto.especialidades());
+            List<Long> especialidadeIds = dto.especialidades().stream().map(e -> e.id()).collect(Collectors.toList());
+            List<Especialidade> especialidades = especialidadeRepository.findAllById(especialidadeIds);
             if (especialidades.size() != dto.especialidades().size()) {
                 throw new RuntimeException("Uma ou mais especialidades não foram encontradas.");
             }
