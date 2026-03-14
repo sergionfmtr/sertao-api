@@ -34,4 +34,12 @@ public class Especialidade {
     @JsonIgnore
     @ManyToMany(mappedBy = "especialidades")
     private Set<Medico> medicos = new HashSet<>();
+
+    // Construtor vazio exigido pelo JPA
+    public Especialidade() {
+    }
+
+    public Especialidade(EspecialidadeDTO dto) {
+        this.nome = dto.nome();
+    }
 }

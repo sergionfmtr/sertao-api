@@ -29,7 +29,7 @@ public class EspecialidadeController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar especialidade por ID", description = "Retorna uma especialidade específica baseada no ID fornecido")
-    public ResponseEntity<EspecialidadeResponse> buscar(@PathVariable Long id) {
+    public ResponseEntity<EspecialidadeResponse> findById(@PathVariable Long id) {
         return service.findById(id)
                 .map(EspecialidadeResponse::toResponse)
                 .map(ResponseEntity::ok)
@@ -37,10 +37,12 @@ public class EspecialidadeController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Criar nova especialidade", description = "Cria uma nova especialidade com os dados fornecidos")
-    public Especialidade criar(@RequestBody Especialidade especialidade) {
-        return service.salvar(especialidade);
+    public ResponseEntity<EspecialidadeResponse> save(@RequestBody EspecialidadeRequest request) {
+        return service.save(request.toEspecialidadeDto())
+                .map(EspecialidadeResponse::toResponse)
+                .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
+                .orElse(ResponseEntity.badRequest().build());
     }
 
     @PutMapping("/{id}")
