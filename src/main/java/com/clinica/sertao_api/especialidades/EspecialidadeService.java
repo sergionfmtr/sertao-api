@@ -32,12 +32,14 @@ public class EspecialidadeService {
         return Optional.of(new EspecialidadeDTO(saved));
     }
 
-    public Especialidade atualizar(Long id, Especialidade especialidadeAtualizada) {
+    public Optional<EspecialidadeDTO> update(Long id, EspecialidadeDTO dto) {
         if (repository.existsById(id)) {
+            Especialidade especialidadeAtualizada = new Especialidade(dto);
             especialidadeAtualizada.setId(id);
-            return repository.save(especialidadeAtualizada);
+            Especialidade saved = repository.save(especialidadeAtualizada);
+            return Optional.of(new EspecialidadeDTO(saved));
         }
-        return null;
+        return Optional.empty();
     }
 
     public void deletar(Long id) {

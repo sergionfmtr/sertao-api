@@ -47,12 +47,11 @@ public class EspecialidadeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar especialidade", description = "Atualiza os dados de uma especialidade existente")
-    public ResponseEntity<Especialidade> atualizar(@PathVariable Long id, @RequestBody Especialidade especialidade) {
-        Especialidade atualizada = service.atualizar(id, especialidade);
-        if (atualizada != null) {
-            return ResponseEntity.ok(atualizada);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<EspecialidadeResponse> atualizar(@PathVariable Long id, @RequestBody EspecialidadeRequest request) {
+        return service.update(id, request.toEspecialidadeDto())
+                .map(EspecialidadeResponse::toResponse)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
