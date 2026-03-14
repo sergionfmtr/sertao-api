@@ -1,0 +1,474 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1773442351930
+  modified: 1773442351930
+  description: ""
+collection:
+  - name: especialidades
+    meta:
+      id: fld_e654572ed8b94f82b3dc0de96df45de1
+      created: 1773448800196
+      modified: 1773510077729
+      sortKey: -1773448800197
+      description: ""
+    children:
+      - url: http://localhost:8080/especialidades
+        name: /especialidades
+        meta:
+          id: req_38ba76ea998a4038aa11ad413e4065f4
+          created: 1773442747890
+          modified: 1773448829367
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818459
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/especialidades
+        name: /especialidades
+        meta:
+          id: req_09e3f5112c2648e5bc276314e8a74fc7
+          created: 1773442771978
+          modified: 1773448846330
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818421.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Pediatria"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/especialidades/2
+        name: /especialidades/{id}
+        meta:
+          id: req_0f36d39ed4e6461ebf52ec705e213fc3
+          created: 1773445577263
+          modified: 1773448844080
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818434
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/especialidades/5
+        name: /especialidades
+        meta:
+          id: req_38cf0dd95baf48f9b87c63450eb65b2c
+          created: 1773448509614
+          modified: 1773490408504
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818409
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Pediatria"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/especialidades/6
+        name: /especialidades/{id}
+        meta:
+          id: req_2c25323e3bc74a2bbb51767e1a7ae188
+          created: 1773448707665
+          modified: 1773490419424
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818309
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: medico
+    meta:
+      id: fld_641aa983a7b848958ce25cd7ab2ef9e9
+      created: 1773489709942
+      modified: 1773489709942
+      sortKey: -1773489709942
+      description: ""
+    children:
+      - url: http://localhost:8080/medicos
+        name: /medicos
+        meta:
+          id: req_5fbf5834286544e6ae5f7cd4f4b9b123
+          created: 1773442427581
+          modified: 1773489728308
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717607
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/medicos
+        name: /medicos
+        meta:
+          id: req_3b74be3486e24dbb9cf53f2b4c6a1339
+          created: 1773442521422
+          modified: 1773496770506
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717532
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+             "nome": "Sérgio 4",
+              "crm": "000-0",
+            "telefone": "(85)9.9999-9999",
+               "email": "sergio6@email.com",
+            	"especialidades": [1]
+
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/medicos/1
+        name: /medicos
+        meta:
+          id: req_d01dd3cf02234749bf853dc58a56d28d
+          created: 1773487827289
+          modified: 1773489724824
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717507
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Sérgio Carvalho",
+              "crm": null,
+              "telefone": "(85)9.9999-9999",
+              "email": "sergio@email.com",
+            	"especialidades": [1, 2]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/medicos/6
+        name: /medicos
+        meta:
+          id: req_14899fdd0bbf4ac6962e6566f44c229f
+          created: 1773487961823
+          modified: 1773489722271
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717407
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/medicos/1
+        name: /medicos/{id}
+        meta:
+          id: req_0aa02b42cb044f92b42028cdd7605e40
+          created: 1773489743466
+          modified: 1773489785666
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717557
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: pacientes
+    meta:
+      id: fld_7cf4dcd65bbf417994cf5368ab36c5b9
+      created: 1773502623411
+      modified: 1773510083966
+      sortKey: -1773448800147
+      description: ""
+    children:
+      - url: http://localhost:8080/pacientes
+        name: /pacientes
+        meta:
+          id: req_40ff2615962d42e9b1873aa6761cf7ac
+          created: 1773502623414
+          modified: 1773502646328
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818459
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/pacientes
+        name: /pacientes
+        meta:
+          id: req_ca32f26e849a42a598c468eba4cf3289
+          created: 1773502623415
+          modified: 1773510362463
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818421.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Gandalf",
+              "cpf": "000.000.000-01",
+              "birthDate": "2026-03-14",
+              "phone": "(85)9.9999-9999",
+              "email": "gandalf@email.com",
+            	"endereco": {
+                "cep": "18817-335",
+                "logradouro": "Terra",
+                "numero": "string",
+                "complemento": "string",
+                "bairro": "string",
+                "cidade": "string",
+                "estado": "ZJ"
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/pacientes/2
+        name: /pacientes/{id}
+        meta:
+          id: req_8f03adbf0d2d42569319ca85fc59b170
+          created: 1773502623416
+          modified: 1773510447279
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818434
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/pacientes/2
+        name: /pacientes
+        meta:
+          id: req_b53a5714c32c4f34b8d609e47e1d9266
+          created: 1773502623417
+          modified: 1773510420448
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818409
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Frodo Baggins",
+              "cpf": "000.000.000-01",
+              "birthDate": "2026-03-14",
+              "phone": "(85)9.9999-9999",
+              "email": "frodo.baggins@email.com",
+            	"endereco": {
+            		"cep": "00001-001",
+            		"logradouro": "Estrada do Bolsão",
+            		"numero": "1",
+            		"complemento": "Toca sob a colina",
+            		"bairro": "Bolsão",
+            		"cidade": "Hobbiton",
+            		"estado": "SH"
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/pacientes/1
+        name: /pacientes/{id}
+        meta:
+          id: req_87ff282b89c04f6f8f56eb17920376c6
+          created: 1773502623419
+          modified: 1773510432042
+          isPrivate: false
+          description: ""
+          sortKey: -1773448818309
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1773442391616
+    modified: 1773442391616
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1773442391590
+    modified: 1773442391590
+    isPrivate: false
