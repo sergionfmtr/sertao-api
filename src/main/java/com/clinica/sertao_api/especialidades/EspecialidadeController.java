@@ -2,6 +2,7 @@ package com.clinica.sertao_api.especialidades;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class EspecialidadeController {
 
     @PostMapping
     @Operation(summary = "Criar nova especialidade", description = "Cria uma nova especialidade com os dados fornecidos")
-    public ResponseEntity<EspecialidadeResponse> save(@RequestBody EspecialidadeRequest request) {
+    public ResponseEntity<EspecialidadeResponse> save(@RequestBody @Valid EspecialidadeRequest request) {
         return service.save(request.toEspecialidadeDto())
                 .map(EspecialidadeResponse::toResponse)
                 .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
@@ -47,7 +48,7 @@ public class EspecialidadeController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar especialidade", description = "Atualiza os dados de uma especialidade existente")
-    public ResponseEntity<EspecialidadeResponse> update(@PathVariable Long id, @RequestBody EspecialidadeRequest request) {
+    public ResponseEntity<EspecialidadeResponse> update(@PathVariable Long id, @RequestBody @Valid EspecialidadeRequest request) {
         return service.update(id, request.toEspecialidadeDto())
                 .map(EspecialidadeResponse::toResponse)
                 .map(ResponseEntity::ok)

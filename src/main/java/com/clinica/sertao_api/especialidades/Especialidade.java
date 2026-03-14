@@ -35,6 +35,7 @@ public class Especialidade {
     private Long id;
 
     @Schema(description = "Nome da especialidade", example = "Cardiologia")
+    @Column(nullable = false, unique = true)
     private String nome;
 
     @JsonIgnore
