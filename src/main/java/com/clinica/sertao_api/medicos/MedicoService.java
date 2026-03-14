@@ -2,6 +2,7 @@ package com.clinica.sertao_api.medicos;
 
 import com.clinica.sertao_api.especialidades.Especialidade;
 import com.clinica.sertao_api.especialidades.EspecialidadeRepository;
+import com.clinica.sertao_api.infra.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class MedicoService {
 
     @Transactional(readOnly = true)
     public MedicoDTO findById(Integer id) {
-        Medico entity = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Médico não encontrado"));
+        Medico entity = medicoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado"));
         return new MedicoDTO(entity);
     }
     
@@ -41,7 +42,7 @@ public class MedicoService {
     @Transactional
     public MedicoDTO update(Integer id, MedicoDTO dto) {
         Medico entity = medicoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Médico não encontrado para atualização"));
+                .orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado para atualização"));
         copyDtoToEntity(dto, entity);
         entity = medicoRepository.save(entity);
         return new MedicoDTO(entity);
@@ -58,7 +59,7 @@ public class MedicoService {
             List<Long> especialidadeIds = dto.especialidades().stream().map(e -> e.id()).collect(Collectors.toList());
             List<Especialidade> especialidades = especialidadeRepository.findAllById(especialidadeIds);
             if (especialidades.size() != dto.especialidades().size()) {
-                throw new RuntimeException("Uma ou mais especialidades não foram encontradas.");
+                throw new ResourceNotFoundException("Uma ou mais especialidades não foram encontradas.");
             }
             entity.getEspecialidades().addAll(especialidades);
         }
@@ -67,7 +68,7 @@ public class MedicoService {
     @Transactional
     public void delete(Integer id) {
         if (!medicoRepository.existsById(id)) {
-            throw new RuntimeException("Médico não encontrado para exclusão");
+            throw new ResourceNotFoundException("Médico não encontrado para exclusão");
         }
         medicoRepository.deleteById(id);
     }
