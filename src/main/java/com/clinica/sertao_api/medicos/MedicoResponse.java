@@ -23,14 +23,4 @@ public record MedicoResponse(
             dto.email()
         );
     }
-
-    public MedicoDTO toMedicoDTO() {
-        return new MedicoDTO(
-            this.id(),
-            this.nome(),
-            this.crm(),
-            this.telefone(),
-            this.email()
-        );
-    }
 }

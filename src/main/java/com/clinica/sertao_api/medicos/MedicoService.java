@@ -1,5 +1,7 @@
 package com.clinica.sertao_api.medicos;
 
+import com.clinica.sertao_api.especialidades.Especialidade;
+import com.clinica.sertao_api.especialidades.EspecialidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,9 @@ public class MedicoService {
 
     @Autowired
     private MedicoRepository medicoRepository;
+
+    @Autowired
+    private EspecialidadeRepository especialidadeRepository;
 
     @Transactional(readOnly = true)
     public List<MedicoDTO> findAll() {
@@ -26,28 +31,43 @@ public class MedicoService {
     }
     
     @Transactional
-    public MedicoDTO insert(MedicoDTO dto) {
-        Medico entity = new Medico(dto);
+    public MedicoDTO save(MedicoDTO dto) {
+        Medico entity = new Medico();
+        copyDtoToEntity(dto, entity);
         entity = medicoRepository.save(entity);
         return new MedicoDTO(entity);
     }
-    
+
+    @Transactional
+    public MedicoDTO update(Integer id, MedicoDTO dto) {
+        Medico entity = medicoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Médico não encontrado para atualização"));
+        copyDtoToEntity(dto, entity);
+        entity = medicoRepository.save(entity);
+        return new MedicoDTO(entity);
+    }
+
+    private void copyDtoToEntity(MedicoDTO dto, Medico entity) {
+        entity.setNome(dto.nome());
+        entity.setCrm(dto.crm());
+        entity.setEmail(dto.email());
+        entity.setTelefone(dto.telefone());
+
+        entity.getEspecialidades().clear();
+        if (dto.especialidades() != null && !dto.especialidades().isEmpty()) {
+            List<Especialidade> especialidades = especialidadeRepository.findAllById(dto.especialidades());
+            if (especialidades.size() != dto.especialidades().size()) {
+                throw new RuntimeException("Uma ou mais especialidades não foram encontradas.");
+            }
+            entity.getEspecialidades().addAll(especialidades);
+        }
+    }
+
     @Transactional
     public void delete(Integer id) {
         if (!medicoRepository.existsById(id)) {
             throw new RuntimeException("Médico não encontrado para exclusão");
         }
         medicoRepository.deleteById(id);
-    }
-
-    @Transactional
-    public MedicoDTO update(Integer id, MedicoDTO dto) {
-        if (!medicoRepository.existsById(id)) {
-            throw new RuntimeException("Médico não encontrado para atualização");
-        }
-        Medico entity = new Medico(dto);
-        entity.setId(id);
-        entity = medicoRepository.save(entity);
-        return new MedicoDTO(entity);
     }
 }

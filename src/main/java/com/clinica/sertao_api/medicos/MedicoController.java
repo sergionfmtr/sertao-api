@@ -33,7 +33,7 @@ public class MedicoController {
     @PostMapping
     public ResponseEntity<MedicoResponse> insert(@RequestBody MedicoRequest request) {
         MedicoDTO dto = request.toMedicoDto();
-        dto = medicoService.insert(dto);
+        dto = medicoService.save(dto);
         
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.id()).toUri();
         return ResponseEntity.created(uri).body(MedicoResponse.toResponse(dto));

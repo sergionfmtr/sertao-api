@@ -48,11 +48,4 @@ public class Medico {
     )
     private Set<Especialidade> especialidades = new HashSet<>();
 
-    public Medico(MedicoDTO dto) {
-        this.id = dto.id();
-        this.nome = dto.nome();
-        this.crm = dto.crm();
-        this.telefone = dto.telefone();
-        this.email = dto.email();
-    }
 }
