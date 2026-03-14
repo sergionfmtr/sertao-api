@@ -1,6 +1,9 @@
 package com.clinica.sertao_api.pacientes;
 
 import com.clinica.sertao_api.infra.exception.BusinessException;
+import com.clinica.sertao_api.pacientes.enderecos.Endereco;
+import com.clinica.sertao_api.pacientes.enderecos.EnderecoDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +32,7 @@ public class PacienteService {
 
     @Transactional
     public Optional<PacienteDTO> save(PacienteDTO dto) {
-        repository.findByCpf(dto.cpf()).ifPresent(p -> {
-            throw new BusinessException("Já existe um paciente com o CPF " + dto.cpf());
-        });
+        validateCpfUniqueness(dto.cpf(), null);
 
         Paciente paciente = mapToEntity(dto);
         Paciente saved = repository.save(paciente);
@@ -40,19 +41,75 @@ public class PacienteService {
 
     @Transactional
     public Optional<PacienteDTO> update(Long id, PacienteDTO dto) {
-        repository.findByCpf(dto.cpf()).ifPresent(p -> {
-            if (!p.getId().equals(id)) {
-                throw new BusinessException("O CPF " + dto.cpf() + " já está em uso por outro paciente.");
+        return repository.findById(id).map(pacienteExistente -> {
+            validateCpfUniqueness(dto.cpf(), id);
+            
+            // Atualiza dados básicos
+            updateBasicInfo(pacienteExistente, dto);
+            
+            // Atualiza ou cria o endereço vinculado
+            updateAddressInfo(pacienteExistente, dto.endereco());
+
+            return new PacienteDTO(repository.save(pacienteExistente));
+        });
+    }
+
+    private void validateCpfUniqueness(String cpf, Long id) {
+        repository.findByCpf(cpf).ifPresent(p -> {
+            if (id == null || !p.getId().equals(id)) {
+                throw new BusinessException("O CPF " + cpf + " já está em uso.");
             }
         });
+    }
 
-        if (repository.existsById(id)) {
-            Paciente paciente = mapToEntity(dto);
-            paciente.setId(id);
-            Paciente saved = repository.save(paciente);
-            return Optional.of(new PacienteDTO(saved));
+    private void updateBasicInfo(Paciente paciente, PacienteDTO dto) {
+        paciente.setNome(dto.name());
+        paciente.setCpf(dto.cpf());
+        paciente.setDataNascimento(dto.birthDate());
+        paciente.setTelefone(dto.phone());
+        paciente.setEmail(dto.email());
+    }
+
+    private void updateAddressInfo(Paciente paciente, EnderecoDTO addressDto) {
+        if (addressDto == null) return;
+
+        Endereco endereco = (paciente.getEndereco() != null) 
+                            ? paciente.getEndereco() 
+                            : new Endereco();
+        
+        endereco.setCep(addressDto.cep());
+        endereco.setLogradouro(addressDto.logradouro());
+        endereco.setNumero(addressDto.numero());
+        endereco.setComplemento(addressDto.complemento());
+        endereco.setBairro(addressDto.bairro());
+        endereco.setCidade(addressDto.cidade());
+        endereco.setEstado(addressDto.estado());
+        
+        paciente.setEndereco(endereco);
+    }
+
+    private Paciente mapToEntity(PacienteDTO dto) {
+        Paciente paciente = Paciente.builder()
+                .nome(dto.name())
+                .cpf(dto.cpf())
+                .dataNascimento(dto.birthDate())
+                .telefone(dto.phone())
+                .email(dto.email())
+                .build();
+
+        if (dto.endereco() != null) {
+            Endereco endereco = Endereco.builder()
+                        .cep(dto.endereco().cep())
+                        .logradouro(dto.endereco().logradouro())
+                        .numero(dto.endereco().numero())
+                        .complemento(dto.endereco().complemento())
+                        .bairro(dto.endereco().bairro())
+                        .cidade(dto.endereco().cidade())
+                        .estado(dto.endereco().estado())
+                        .build();
+                paciente.setEndereco(endereco);
         }
-        return Optional.empty();
+        return paciente;
     }
 
     @Transactional
@@ -60,13 +117,16 @@ public class PacienteService {
         repository.deleteById(id);
     }
 
+
+    /*
     private Paciente mapToEntity(PacienteDTO dto) {
         return Paciente.builder()
-                .nome(dto.name())
-                .cpf(dto.cpf())
-                .dataNascimento(dto.birthDate())
-                .telefone(dto.phone())
-                .email(dto.email())
-                .build();
+        .nome(dto.name())
+        .cpf(dto.cpf())
+        .dataNascimento(dto.birthDate())
+        .telefone(dto.phone())
+        .email(dto.email())
+        .build();
     }
+    */
 }

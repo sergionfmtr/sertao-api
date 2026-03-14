@@ -1,10 +1,15 @@
 package com.clinica.sertao_api.pacientes;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+
+import com.clinica.sertao_api.pacientes.enderecos.EnderecoDTO;
+
+
 
 public record PacienteRequest(
     
@@ -24,9 +29,11 @@ public record PacienteRequest(
 
     @Email(message = "O e-mail deve ser um endereço válido.") 
     @Size(max = 100, message = "O e-mail não pode exceder 100 caracteres.") 
-    String email
+    String email,
+
+    @NotNull @Valid EnderecoDTO endereco
 ) {
     public PacienteDTO toPacienteDto() {
-        return new PacienteDTO(null, name, cpf, birthDate, phone, email);
+        return new PacienteDTO(null, name, cpf, birthDate, phone, email, endereco);
     }
 }

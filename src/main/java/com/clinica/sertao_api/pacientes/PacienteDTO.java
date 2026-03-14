@@ -2,13 +2,16 @@ package com.clinica.sertao_api.pacientes;
 
 import java.time.LocalDate;
 
+import com.clinica.sertao_api.pacientes.enderecos.EnderecoDTO;
+
 public record PacienteDTO(
         Long id,
         String name,
         String cpf,
         LocalDate birthDate,
         String phone,
-        String email
+        String email,
+        EnderecoDTO endereco
 ) {
     public PacienteDTO(Paciente paciente) {
         this(
@@ -17,7 +20,8 @@ public record PacienteDTO(
             paciente.getCpf(),
             paciente.getDataNascimento(),
             paciente.getTelefone(),
-            paciente.getEmail()
+            paciente.getEmail(),
+           (paciente.getEndereco() != null ? new EnderecoDTO(paciente.getEndereco()) : null)
         );
     }
 }

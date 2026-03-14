@@ -9,6 +9,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import com.clinica.sertao_api.pacientes.enderecos.Endereco;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -46,5 +48,15 @@ public class Paciente {
     @Size(max = 100)
     @Column(length = 100)
     private String email;
+
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Endereco endereco;
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+        if (endereco != null) {
+            endereco.setPaciente(this);
+        }
+    }
 } 
     
