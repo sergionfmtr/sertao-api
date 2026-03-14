@@ -71,7 +71,7 @@ Não é necessário configurar cada endereço manualmente. Siga os passos abaixo
 
 ### 3. Utilizando na Prática
 
-1. Certifique-se de que a aplicação está rodando (veja a seção [Como executar com Docker](##como-executar-com-docker)).
+1. Certifique-se de que a aplicação está rodando (veja a seção [Como executar com Docker](#como-executar-com-docker)).
 2. No Insomnia, clique em uma das requisições (ex: `GET /medicos` para listar médicos).
 3. Clique no botão azul **"Send"** (Enviar) no topo.
 4. O resultado aparecerá no painel da direita.
