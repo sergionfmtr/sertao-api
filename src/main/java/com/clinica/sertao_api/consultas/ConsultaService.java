@@ -8,9 +8,11 @@ import com.clinica.sertao_api.pacientes.Paciente;
 import com.clinica.sertao_api.pacientes.PacienteRepository;
 import com.clinica.sertao_api.infra.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,8 +33,26 @@ public class ConsultaService {
     private EspecialidadeRepository especialidadeRepository;
 
     @Transactional(readOnly = true)
-    public List<ConsultaDTO> findAll() {
-        return repository.findAll().stream()
+    public List<ConsultaDTO> findAll(Long medicoId, Long pacienteId, Long especialidadeId, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+        Specification<Consulta> spec = Specification.where(null);
+
+        if (medicoId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("medico").get("id"), medicoId));
+        }
+        if (pacienteId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("paciente").get("id"), pacienteId));
+        }
+        if (especialidadeId != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("especialidade").get("id"), especialidadeId));
+        }
+        if (dataInicial != null) {
+            spec = spec.and((root, query, cb) -> cb.greaterThanOrEqualTo(root.get("dataConsulta"), dataInicial));
+        }
+        if (dataFinal != null) {
+            spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("dataConsulta"), dataFinal));
+        }
+
+        return repository.findAll(spec).stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

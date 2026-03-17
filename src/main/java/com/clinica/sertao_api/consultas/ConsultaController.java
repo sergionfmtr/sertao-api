@@ -1,13 +1,16 @@
 package com.clinica.sertao_api.consultas;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +23,15 @@ public class ConsultaController {
     private ConsultaService service;
 
     @GetMapping
-    @Operation(summary = "Listar todas as consultas", description = "Retorna uma lista de todas as consultas registradas")
-    public ResponseEntity<List<ConsultaResponse>> findAll() {
-        List<ConsultaResponse> responses = service.findAll().stream()
+    @Operation(summary = "Listar todas as consultas", description = "Retorna uma lista de todas as consultas registradas, permitindo filtros opcionais")
+    public ResponseEntity<List<ConsultaResponse>> findAll(
+            @Parameter(description = "Filtrar pelo ID do médico") @RequestParam(required = false) Long medicoId,
+            @Parameter(description = "Filtrar pelo ID do paciente") @RequestParam(required = false) Long pacienteId,
+            @Parameter(description = "Filtrar pelo ID da especialidade") @RequestParam(required = false) Long especialidadeId,
+            @Parameter(description = "Data inicial para o filtro de período", example = "2026-10-15T00:00:00") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
+            @Parameter(description = "Data final para o filtro de período", example = "2026-10-15T23:59:59") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal) {
+        
+        List<ConsultaResponse> responses = service.findAll(medicoId, pacienteId, especialidadeId, dataInicial, dataFinal).stream()
                 .map(ConsultaResponse::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responses);
