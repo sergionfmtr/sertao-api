@@ -294,6 +294,29 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: http://localhost:8080/medicos/1
+        name: /medicos/especialidade/{id}
+        meta:
+          id: req_032cd505f360430bbeee1a062e7b9aac
+          created: 1773710962150
+          modified: 1773710962150
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717544.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - name: pacientes
     meta:
       id: fld_7cf4dcd65bbf417994cf5368ab36c5b9

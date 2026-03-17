@@ -26,6 +26,12 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
+    public List<MedicoDTO> findByEspecialidade(Long especialidadeId) {
+        List<Medico> result = medicoRepository.findByEspecialidadeId(especialidadeId);
+        return result.stream().map(MedicoDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public MedicoDTO findById(Integer id) {
         Medico entity = medicoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado"));
         return new MedicoDTO(entity);

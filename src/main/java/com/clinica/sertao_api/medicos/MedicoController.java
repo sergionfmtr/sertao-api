@@ -37,6 +37,16 @@ public class MedicoController {
         return ResponseEntity.ok().body(MedicoResponse.toResponse(dto));
     }
 
+    @GetMapping(value = "/especialidade/{especialidadeId}")
+    @Operation(summary = "Filtrar médicos por especialidade", description = "Retorna uma lista de médicos que possuem a especialidade com o ID fornecido")
+    public ResponseEntity<List<MedicoResponse>> findByEspecialidade(@Parameter(description = "ID da especialidade a ser filtrada", required = true) @PathVariable Long especialidadeId) {
+        List<MedicoResponse> list = medicoService.findByEspecialidade(especialidadeId)
+                                                .stream()
+                                                .map(MedicoResponse::toResponse)
+                                                .toList();
+        return ResponseEntity.ok().body(list);
+    }
+
     @PostMapping
     @Operation(summary = "Cadastrar novo médico", description = "Cria um novo médico com os dados fornecidos")
     public ResponseEntity<MedicoResponse> insert(@RequestBody @Valid MedicoRequest request) {
