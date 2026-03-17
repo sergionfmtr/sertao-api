@@ -18,9 +18,20 @@ public class DashboardService {
         LocalDateTime inicioDoMes = mesAtual.atDay(1).atStartOfDay();
         LocalDateTime fimDoMes = mesAtual.atEndOfMonth().atTime(23, 59, 59);
 
-        // Reutilizamos o método findAll existente no ConsultaService passando as datas do mês atual
-        int quantidade = consultaService.findAll(null, null, null, inicioDoMes, fimDoMes).size();
+        var consultas = consultaService.findAll(null, null, null, inicioDoMes, fimDoMes);
 
-        return new DashboardResponse((long) quantidade);
+        long quantidadeConsultas = consultas.size();
+        
+        long pacientesAtendidos = consultas.stream()
+                .map(consulta -> consulta.pacienteId()) // Ajuste se o seu DTO usar outro formato, como consulta.paciente().id() ou consulta.getPacienteId()
+                .distinct()
+                .count();
+
+        LocalDateTime agora = LocalDateTime.now();
+        long consultasPendentes = consultas.stream()
+                .filter(consulta -> consulta.dataConsulta() != null && consulta.dataConsulta().isAfter(agora)) // Ajuste se o seu DTO usar getDataConsulta()
+                .count();
+
+        return new DashboardResponse(quantidadeConsultas, pacientesAtendidos, consultasPendentes);
     }
 }
