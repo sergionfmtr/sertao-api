@@ -6,6 +6,7 @@ public record ConsultaResponse(
     Long id,
     Long medicoId,
     Long pacienteId,
+    Long especialidadeId,
     LocalDateTime dataConsulta
 ) {
     public static ConsultaResponse toResponse(ConsultaDTO dto) {
@@ -13,6 +14,7 @@ public record ConsultaResponse(
             dto.id(),
             dto.medicoId(),
             dto.pacienteId(),
+            dto.especialidadeId(),
             dto.dataConsulta()
         );
     }

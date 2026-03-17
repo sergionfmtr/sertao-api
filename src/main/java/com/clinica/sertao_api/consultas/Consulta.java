@@ -2,6 +2,7 @@ package com.clinica.sertao_api.consultas;
 
 import com.clinica.sertao_api.medicos.Medico;
 import com.clinica.sertao_api.pacientes.Paciente;
+import com.clinica.sertao_api.especialidades.Especialidade;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,6 +33,10 @@ public class Consulta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_paciente", nullable = false)
     private Paciente paciente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_especialidade", nullable = false)
+    private Especialidade especialidade;
 
     @Column(name = "data_hora_consulta", nullable = false)
     private LocalDateTime dataConsulta;

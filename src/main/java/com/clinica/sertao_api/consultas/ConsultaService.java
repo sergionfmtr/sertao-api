@@ -1,5 +1,7 @@
 package com.clinica.sertao_api.consultas;
 
+import com.clinica.sertao_api.especialidades.Especialidade;
+import com.clinica.sertao_api.especialidades.EspecialidadeRepository;
 import com.clinica.sertao_api.medicos.Medico;
 import com.clinica.sertao_api.medicos.MedicoRepository;
 import com.clinica.sertao_api.pacientes.Paciente;
@@ -25,6 +27,9 @@ public class ConsultaService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private EspecialidadeRepository especialidadeRepository;
+
     @Transactional(readOnly = true)
     public List<ConsultaDTO> findAll() {
         return repository.findAll().stream()
@@ -45,10 +50,14 @@ public class ConsultaService {
         Paciente paciente = pacienteRepository.findById(dto.pacienteId())
                 .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado."));
 
+        Especialidade especialidade = especialidadeRepository.findById(dto.especialidadeId())
+                .orElseThrow(() -> new ResourceNotFoundException("Especialidade não encontrada."));
+
         Consulta consulta = new Consulta();
 
         consulta.setMedico(medico);
         consulta.setPaciente(paciente);
+        consulta.setEspecialidade(especialidade);
         consulta.setDataConsulta(dto.dataConsulta());
 
         Consulta saved = repository.save(consulta);
@@ -75,6 +84,13 @@ public class ConsultaService {
                 consulta.setPaciente(paciente);
             }
 
+            // Atualiza a especialidade caso o ID enviado seja diferente do atual
+            if (consulta.getEspecialidade() == null || consulta.getEspecialidade().getId().longValue() != dto.especialidadeId().longValue()) {
+                Especialidade especialidade = especialidadeRepository.findById(dto.especialidadeId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Especialidade não encontrada."));
+                consulta.setEspecialidade(especialidade);
+            }
+
             return toDto(repository.save(consulta));
         });
     }
@@ -89,6 +105,7 @@ public class ConsultaService {
     private ConsultaDTO toDto(Consulta consulta) {
         Long medicoId = consulta.getMedico() != null ? consulta.getMedico().getId() : null;
         Long pacienteId = consulta.getPaciente() != null ? consulta.getPaciente().getId() : null;
-        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, consulta.getDataConsulta());
+        Long especialidadeId = consulta.getEspecialidade() != null ? consulta.getEspecialidade().getId() : null;
+        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, especialidadeId, consulta.getDataConsulta());
     }
 }
