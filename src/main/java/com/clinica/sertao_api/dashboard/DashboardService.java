@@ -1,11 +1,15 @@
 package com.clinica.sertao_api.dashboard;
 
+import com.clinica.sertao_api.consultas.ConsultaDTO;
 import com.clinica.sertao_api.consultas.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class DashboardService {
@@ -33,5 +37,11 @@ public class DashboardService {
                 .count();
 
         return new DashboardResponse(quantidadeConsultas, pacientesAtendidos, consultasPendentes);
+    }
+
+    public List<ConsultaDTO> getUltimosAgendamentos() {
+        var todasConsultas = new ArrayList<>(consultaService.findAll(null, null, null, null, null));
+        Collections.reverse(todasConsultas);
+        return todasConsultas.stream().limit(10).toList();
     }
 }
