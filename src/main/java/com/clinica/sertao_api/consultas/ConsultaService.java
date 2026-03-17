@@ -1,10 +1,13 @@
 package com.clinica.sertao_api.consultas;
 
 import com.clinica.sertao_api.especialidades.Especialidade;
+import com.clinica.sertao_api.especialidades.EspecialidadeDTO;
 import com.clinica.sertao_api.especialidades.EspecialidadeRepository;
 import com.clinica.sertao_api.medicos.Medico;
+import com.clinica.sertao_api.medicos.MedicoDTO;
 import com.clinica.sertao_api.medicos.MedicoRepository;
 import com.clinica.sertao_api.pacientes.Paciente;
+import com.clinica.sertao_api.pacientes.PacienteDTO;
 import com.clinica.sertao_api.pacientes.PacienteRepository;
 import com.clinica.sertao_api.infra.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +129,11 @@ public class ConsultaService {
         Long medicoId = consulta.getMedico() != null ? consulta.getMedico().getId() : null;
         Long pacienteId = consulta.getPaciente() != null ? consulta.getPaciente().getId() : null;
         Long especialidadeId = consulta.getEspecialidade() != null ? consulta.getEspecialidade().getId() : null;
-        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, especialidadeId, consulta.getDataConsulta());
+
+        MedicoDTO medico = consulta.getMedico() != null ? new MedicoDTO(consulta.getMedico()) : null;
+        PacienteDTO paciente = consulta.getPaciente() != null ? new PacienteDTO(consulta.getPaciente()) : null;
+        EspecialidadeDTO especialidade = consulta.getEspecialidade() != null ? new EspecialidadeDTO(consulta.getEspecialidade()) : null;
+
+        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, especialidadeId, medico, paciente, especialidade, consulta.getDataConsulta());
     }
 }
