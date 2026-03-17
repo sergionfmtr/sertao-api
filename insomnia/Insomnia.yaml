@@ -459,6 +459,150 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: consultas
+    meta:
+      id: fld_a162e5dca2d6498e80dfc8c26ef8b5e1
+      created: 1773704061428
+      modified: 1773704075573
+      sortKey: -1773489710042
+      description: ""
+    children:
+      - url: http://localhost:8080/consultas?pacienteId=1
+        name: /consultas
+        meta:
+          id: req_6ea5d183c1674f9a8be2e6739bdd4d4f
+          created: 1773704061433
+          modified: 1773709204421
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717607
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/consultas
+        name: /consultas
+        meta:
+          id: req_88e2978af4c24d21a2f7562069188753
+          created: 1773704061436
+          modified: 1773708097393
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717532
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "medicoId": 1,
+              "pacienteId": 1,
+            	  "especialidadeId": 1,
+              "dataConsulta": "2026-03-20T00:02:44.584Z"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/consultas/13
+        name: /consultas
+        meta:
+          id: req_ac5cfeecb4b047a3bfee95642ed7c450
+          created: 1773704061438
+          modified: 1773707448468
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717507
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"medicoId": 1,
+            		"pacienteId": 1,
+            		"dataConsulta": "2027-03-20T00:02:45"
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/consultas/14
+        name: /consultas
+        meta:
+          id: req_873ac8e90b204044acb40ceb6084a2e9
+          created: 1773704061443
+          modified: 1773707479394
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717407
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/medicos/1
+        name: /consultas/{id}
+        meta:
+          id: req_189777a5fbfe4881a2c789dc5970c6a8
+          created: 1773704061445
+          modified: 1773707196974
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717557
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
