@@ -1,7 +1,10 @@
 package com.clinica.sertao_api.consultas;
 
 import com.clinica.sertao_api.medicos.Medico;
+import com.clinica.sertao_api.medicos.MedicoRepository;
 import com.clinica.sertao_api.pacientes.Paciente;
+import com.clinica.sertao_api.pacientes.PacienteRepository;
+import com.clinica.sertao_api.infra.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,12 @@ public class ConsultaService {
 
     @Autowired
     private ConsultaRepository repository;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
     @Transactional(readOnly = true)
     public List<ConsultaDTO> findAll() {
@@ -30,13 +39,13 @@ public class ConsultaService {
 
     @Transactional
     public Optional<ConsultaDTO> save(ConsultaDTO dto) {
+        Medico medico = medicoRepository.findById(dto.medicoId().intValue())
+                .orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado."));
+
+        Paciente paciente = pacienteRepository.findById(dto.pacienteId())
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado."));
+
         Consulta consulta = new Consulta();
-        
-        Medico medico = new Medico();
-        medico.setId(dto.medicoId());
-        
-        Paciente paciente = new Paciente();
-        paciente.setId(dto.pacienteId());
 
         consulta.setMedico(medico);
         consulta.setPaciente(paciente);
