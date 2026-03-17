@@ -60,6 +60,21 @@ public class ConsultaService {
         // Caso precise atualizar a data, médico ou paciente
         return repository.findById(id).map(consulta -> {
             consulta.setDataConsulta(dto.dataConsulta());
+
+            // Atualiza o médico caso o ID enviado seja diferente do atual
+            if (consulta.getMedico() == null || consulta.getMedico().getId().longValue() != dto.medicoId().longValue()) {
+                Medico medico = medicoRepository.findById(dto.medicoId().intValue())
+                        .orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado."));
+                consulta.setMedico(medico);
+            }
+
+            // Atualiza o paciente caso o ID enviado seja diferente do atual
+            if (consulta.getPaciente() == null || consulta.getPaciente().getId().longValue() != dto.pacienteId().longValue()) {
+                Paciente paciente = pacienteRepository.findById(dto.pacienteId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado."));
+                consulta.setPaciente(paciente);
+            }
+
             return toDto(repository.save(consulta));
         });
     }
