@@ -4,7 +4,7 @@ import com.clinica.sertao_api.especialidades.EspecialidadeDTO;
 import java.util.List;
 
 public record MedicoResponse(
-    Integer id,
+    Long id,
     String nome,
     String crm,
     String telefone,

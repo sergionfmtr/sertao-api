@@ -32,7 +32,7 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_medico")
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nome;
