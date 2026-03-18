@@ -353,7 +353,7 @@ collection:
         meta:
           id: req_ca32f26e849a42a598c468eba4cf3289
           created: 1773502623415
-          modified: 1773510362463
+          modified: 1773789159364
           isPrivate: false
           description: ""
           sortKey: -1773448818421.5
@@ -362,11 +362,11 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "name": "Gandalf",
-              "cpf": "000.000.000-01",
+              "name": "Frodo",
+              "cpf": "000.000.000-02",
               "birthDate": "2026-03-14",
               "phone": "(85)9.9999-9999",
-              "email": "gandalf@email.com",
+              "email": "frodo@email.com",
             	"endereco": {
                 "cep": "18817-335",
                 "logradouro": "Terra",
@@ -518,7 +518,7 @@ collection:
         meta:
           id: req_88e2978af4c24d21a2f7562069188753
           created: 1773704061436
-          modified: 1773708097393
+          modified: 1773789203404
           isPrivate: false
           description: ""
           sortKey: -1773489717532
@@ -528,9 +528,9 @@ collection:
           text: |-
             {
               "medicoId": 1,
-              "pacienteId": 1,
-            	  "especialidadeId": 1,
-              "dataConsulta": "2026-03-20T00:02:44.584Z"
+              "pacienteId": 2,
+            	 "especialidadeId": 1,
+              "dataConsulta": "2026-03-25T00:10:50.000Z"
             }
         headers:
           - name: Content-Type
@@ -609,6 +609,60 @@ collection:
           id: req_189777a5fbfe4881a2c789dc5970c6a8
           created: 1773704061445
           modified: 1773707196974
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717557
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: dashboard
+    meta:
+      id: fld_87b133133b354c6787df19467a6d0087
+      created: 1773789228610
+      modified: 1773789235378
+      sortKey: -1773489710142
+      description: ""
+    children:
+      - url: http://localhost:8080/dashboard/ultimos-agendamentos
+        name: /ultimos-agendamentos
+        meta:
+          id: req_746be2746cf9467587359ab73aa2bd80
+          created: 1773789228615
+          modified: 1773789299783
+          isPrivate: false
+          description: ""
+          sortKey: -1773489717607
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.4.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/dashboard
+        name: /dashboard
+        meta:
+          id: req_b80eba33902b470db9bcaafa984866f1
+          created: 1773789228628
+          modified: 1773789335442
           isPrivate: false
           description: ""
           sortKey: -1773489717557
