@@ -21,7 +21,10 @@ public record ConsultaResponse(
     EspecialidadeResponse especialidade,
 
     @Schema(description = "Data e horário agendados para a consulta", type = "string", example = "2026-10-15T14:30:00")
-    LocalDateTime dataConsulta
+    LocalDateTime dataConsulta,
+
+    @Schema(description = "Status da consulta", example = "AGENDADA")
+    ConsultaStatus status
 ) {
     public static ConsultaResponse toResponse(ConsultaDTO dto) {
         if (dto == null) return null;
@@ -30,7 +33,8 @@ public record ConsultaResponse(
             dto.medico() != null ? MedicoResponse.toResponse(dto.medico()) : null,
             dto.paciente() != null ? PacienteResponse.toResponse(dto.paciente()) : null,
             dto.especialidade() != null ? EspecialidadeResponse.toResponse(dto.especialidade()) : null,
-            dto.dataConsulta()
+            dto.dataConsulta(),
+            dto.status()
         );
     }
 }

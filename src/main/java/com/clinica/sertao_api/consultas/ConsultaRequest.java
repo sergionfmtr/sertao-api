@@ -22,9 +22,12 @@ public record ConsultaRequest(
     @Schema(description = "Data e horário da consulta", type = "string", example = "2026-10-15T14:30:00")
     @NotNull(message = "A data da consulta é obrigatória.")
     @Future(message = "A data da consulta deve ser no futuro.")
-    LocalDateTime dataConsulta
+    LocalDateTime dataConsulta,
+
+    @Schema(description = "Status da consulta", example = "AGENDADA")
+    ConsultaStatus status
 ) {
     public ConsultaDTO toConsultaDto() {
-        return new ConsultaDTO(null, this.medicoId(), this.pacienteId(), this.especialidadeId(), this.dataConsulta());
+        return new ConsultaDTO(null, this.medicoId(), this.pacienteId(), this.especialidadeId(), this.dataConsulta(), this.status() != null ? this.status() : ConsultaStatus.AGENDADA);
     }
 }

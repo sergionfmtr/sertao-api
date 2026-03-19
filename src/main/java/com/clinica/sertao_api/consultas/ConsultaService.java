@@ -82,6 +82,7 @@ public class ConsultaService {
         consulta.setPaciente(paciente);
         consulta.setEspecialidade(especialidade);
         consulta.setDataConsulta(dto.dataConsulta());
+        consulta.setStatus(dto.status() != null ? dto.status() : ConsultaStatus.AGENDADA);
 
         Consulta saved = repository.save(consulta);
         return Optional.of(toDto(saved));
@@ -92,6 +93,10 @@ public class ConsultaService {
         // Caso precise atualizar a data, médico ou paciente
         return repository.findById(id).map(consulta -> {
             consulta.setDataConsulta(dto.dataConsulta());
+
+            if (dto.status() != null) {
+                consulta.setStatus(dto.status());
+            }
 
             // Atualiza o médico caso o ID enviado seja diferente do atual
             if (consulta.getMedico() == null || consulta.getMedico().getId().longValue() != dto.medicoId().longValue()) {
@@ -134,6 +139,6 @@ public class ConsultaService {
         PacienteDTO paciente = consulta.getPaciente() != null ? new PacienteDTO(consulta.getPaciente()) : null;
         EspecialidadeDTO especialidade = consulta.getEspecialidade() != null ? new EspecialidadeDTO(consulta.getEspecialidade()) : null;
 
-        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, especialidadeId, medico, paciente, especialidade, consulta.getDataConsulta());
+        return new ConsultaDTO(consulta.getId(), medicoId, pacienteId, especialidadeId, medico, paciente, especialidade, consulta.getDataConsulta(), consulta.getStatus());
     }
 }

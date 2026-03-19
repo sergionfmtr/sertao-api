@@ -40,4 +40,8 @@ public class Consulta {
 
     @Column(name = "data_hora_consulta", nullable = false)
     private LocalDateTime dataConsulta;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private ConsultaStatus status;
 }

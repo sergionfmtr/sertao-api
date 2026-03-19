@@ -14,9 +14,10 @@ public record ConsultaDTO(
     MedicoDTO medico,
     PacienteDTO paciente,
     EspecialidadeDTO especialidade,
-    LocalDateTime dataConsulta
+    LocalDateTime dataConsulta,
+    ConsultaStatus status
 ) {
-    public ConsultaDTO(Long id, Long medicoId, Long pacienteId, Long especialidadeId, LocalDateTime dataConsulta) {
-        this(id, medicoId, pacienteId, especialidadeId, null, null, null, dataConsulta);
+    public ConsultaDTO(Long id, Long medicoId, Long pacienteId, Long especialidadeId, LocalDateTime dataConsulta, ConsultaStatus status) {
+        this(id, medicoId, pacienteId, especialidadeId, null, null, null, dataConsulta, status);
     }
 }
