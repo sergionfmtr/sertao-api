@@ -22,7 +22,7 @@ public class DashboardService {
         LocalDateTime inicioDoMes = mesAtual.atDay(1).atStartOfDay();
         LocalDateTime fimDoMes = mesAtual.atEndOfMonth().atTime(23, 59, 59);
 
-        var consultas = consultaService.findAll(null, null, null, inicioDoMes, fimDoMes);
+        var consultas = consultaService.findAll(null, null, null, inicioDoMes, fimDoMes, null);
 
         long quantidadeConsultas = consultas.size();
         
@@ -40,7 +40,7 @@ public class DashboardService {
     }
 
     public List<ConsultaDTO> getUltimosAgendamentos() {
-        var todasConsultas = new ArrayList<>(consultaService.findAll(null, null, null, null, null));
+        var todasConsultas = new ArrayList<>(consultaService.findAll(null, null, null, null, null, null));
         Collections.reverse(todasConsultas);
         return todasConsultas.stream().limit(10).toList();
     }

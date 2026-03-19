@@ -29,9 +29,10 @@ public class ConsultaController {
             @Parameter(description = "Filtrar pelo ID do paciente") @RequestParam(required = false) Long pacienteId,
             @Parameter(description = "Filtrar pelo ID da especialidade") @RequestParam(required = false) Long especialidadeId,
             @Parameter(description = "Data inicial para o filtro de período", example = "2026-10-15T00:00:00") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
-            @Parameter(description = "Data final para o filtro de período", example = "2026-10-15T23:59:59") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal) {
+            @Parameter(description = "Data final para o filtro de período", example = "2026-10-15T23:59:59") @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
+            @Parameter(description = "Filtrar pelo status da consulta", example = "AGENDADA") @RequestParam(required = false) ConsultaStatus status) {
         
-        List<ConsultaResponse> responses = service.findAll(medicoId, pacienteId, especialidadeId, dataInicial, dataFinal).stream()
+        List<ConsultaResponse> responses = service.findAll(medicoId, pacienteId, especialidadeId, dataInicial, dataFinal, status).stream()
                 .map(ConsultaResponse::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responses);
