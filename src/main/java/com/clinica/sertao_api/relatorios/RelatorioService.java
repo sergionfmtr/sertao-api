@@ -96,7 +96,7 @@ public class RelatorioService {
         }
 
         return List.of(
-                new LabelValueDTO("Kids (0-17)", kids),
+                new LabelValueDTO("Crianças (0-17)", kids),
                 new LabelValueDTO("Adultos (18-59)", adultos),
                 new LabelValueDTO("Idosos (60+)", idosos)
         );
