@@ -70,4 +70,14 @@ public class ConsultaController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/status")
+    @Operation(summary = "Atualizar status da consulta", description = "Altera o status de uma consulta (ex: AGENDADA -> REALIZADA)")
+    public ResponseEntity<ConsultaResponse> updateStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> body) {
+        ConsultaStatus status = ConsultaStatus.valueOf(body.get("status"));
+        return service.updateStatus(id, status)
+                .map(ConsultaResponse::toResponse)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

@@ -10,6 +10,15 @@ public record DashboardResponse(
     Long pacientesAtendidosNoMes,
 
     @Schema(description = "Quantidade de consultas pendentes a realizar no mês atual", example = "15")
-    Long consultasPendentesNoMes
+    Long consultasPendentesNoMes,
+
+    @Schema(description = "Quantidade de agendamentos para o dia atual", example = "3")
+    Long agendamentosHoje,
+
+    @Schema(description = "Total de médicos cadastrados na clínica", example = "4")
+    Long totalMedicos,
+
+    @Schema(description = "Total de pacientes cadastrados na clínica", example = "5")
+    Long totalPacientes
 ) {
 }

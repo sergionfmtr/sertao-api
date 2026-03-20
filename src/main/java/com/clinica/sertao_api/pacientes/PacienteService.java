@@ -26,6 +26,13 @@ public class PacienteService {
     }
 
     @Transactional(readOnly = true)
+    public List<PacienteDTO> search(String query) {
+        return repository.searchByNomeOrCpf(query).stream()
+                .map(PacienteDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public Optional<PacienteDTO> findById(Long id) {
         return repository.findById(id).map(PacienteDTO::new);
     }
