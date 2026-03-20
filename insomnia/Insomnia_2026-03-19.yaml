@@ -43,7 +43,7 @@ collection:
         meta:
           id: req_09e3f5112c2648e5bc276314e8a74fc7
           created: 1773442771978
-          modified: 1773448846330
+          modified: 1773937206739
           isPrivate: false
           description: ""
           sortKey: -1773448818421.5
@@ -52,7 +52,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-              "nome": "Pediatria"
+              "nome": "Endocrinologia"
             }
         headers:
           - name: Content-Type
@@ -154,12 +154,12 @@ collection:
       sortKey: -1773489709942
       description: ""
     children:
-      - url: http://localhost:8080/medicos
+      - url: http://localhost:8080/medicos?medicoId=1
         name: /medicos
         meta:
           id: req_5fbf5834286544e6ae5f7cd4f4b9b123
           created: 1773442427581
-          modified: 1773489728308
+          modified: 1773919990187
           isPrivate: false
           description: ""
           sortKey: -1773489717607
@@ -182,7 +182,7 @@ collection:
         meta:
           id: req_3b74be3486e24dbb9cf53f2b4c6a1339
           created: 1773442521422
-          modified: 1773496770506
+          modified: 1773937500119
           isPrivate: false
           description: ""
           sortKey: -1773489717532
@@ -191,11 +191,11 @@ collection:
           mimeType: application/json
           text: |-
             {
-             "nome": "Sérgio 4",
+             "nome": "Fabio Azevedo",
               "crm": "000-0",
             "telefone": "(85)9.9999-9999",
-               "email": "sergio6@email.com",
-            	"especialidades": [1]
+               "email": "fabio@email.com",
+            	"especialidades": [2]
 
             }
         headers:
@@ -490,12 +490,12 @@ collection:
       sortKey: -1773489710042
       description: ""
     children:
-      - url: http://localhost:8080/consultas?pacienteId=1
+      - url: http://localhost:8080/consultas
         name: /consultas
         meta:
           id: req_6ea5d183c1674f9a8be2e6739bdd4d4f
           created: 1773704061433
-          modified: 1773709204421
+          modified: 1773943089699
           isPrivate: false
           description: ""
           sortKey: -1773489717607
@@ -518,7 +518,7 @@ collection:
         meta:
           id: req_88e2978af4c24d21a2f7562069188753
           created: 1773704061436
-          modified: 1773789203404
+          modified: 1773880822793
           isPrivate: false
           description: ""
           sortKey: -1773489717532
@@ -530,7 +530,8 @@ collection:
               "medicoId": 1,
               "pacienteId": 2,
             	 "especialidadeId": 1,
-              "dataConsulta": "2026-03-25T00:10:50.000Z"
+              "dataConsulta": "2026-03-26T00:08:00.000Z",
+            	"status": "AGENDADA"
             }
         headers:
           - name: Content-Type
@@ -547,12 +548,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:8080/consultas/13
+      - url: http://localhost:8080/consultas/2
         name: /consultas
         meta:
           id: req_ac5cfeecb4b047a3bfee95642ed7c450
           created: 1773704061438
-          modified: 1773707448468
+          modified: 1773881051260
           isPrivate: false
           description: ""
           sortKey: -1773489717507
@@ -563,7 +564,9 @@ collection:
             	{
             		"medicoId": 1,
             		"pacienteId": 1,
-            		"dataConsulta": "2027-03-20T00:02:45"
+            		"especialidadeId": 1,
+            		"dataConsulta": "2027-03-20T00:02:45",
+            		"status": "AGENDADA"
             	}
         headers:
           - name: Content-Type
@@ -603,12 +606,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: http://localhost:8080/medicos/1
+      - url: http://localhost:8080/consultas/1
         name: /consultas/{id}
         meta:
           id: req_189777a5fbfe4881a2c789dc5970c6a8
           created: 1773704061445
-          modified: 1773707196974
+          modified: 1773880934469
           isPrivate: false
           description: ""
           sortKey: -1773489717557

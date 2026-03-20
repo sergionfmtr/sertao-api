@@ -36,7 +36,7 @@ public class ConsultaService {
     private EspecialidadeRepository especialidadeRepository;
 
     @Transactional(readOnly = true)
-    public List<ConsultaDTO> findAll(Long medicoId, Long pacienteId, Long especialidadeId, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+    public List<ConsultaDTO> findAll(Long medicoId, Long pacienteId, Long especialidadeId, LocalDateTime dataInicial, LocalDateTime dataFinal, ConsultaStatus status) {
         Specification<Consulta> spec = Specification.where(null);
 
         if (medicoId != null) {
@@ -53,6 +53,9 @@ public class ConsultaService {
         }
         if (dataFinal != null) {
             spec = spec.and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("dataConsulta"), dataFinal));
+        }
+        if (status != null) {
+            spec = spec.and((root, query, cb) -> cb.equal(root.get("status"), status));
         }
 
         return repository.findAll(spec).stream()
