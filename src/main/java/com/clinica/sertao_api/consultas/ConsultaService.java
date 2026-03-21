@@ -133,6 +133,14 @@ public class ConsultaService {
         }
     }
 
+    @Transactional
+    public Optional<ConsultaDTO> updateStatus(Long id, ConsultaStatus status) {
+        return repository.findById(id).map(consulta -> {
+            consulta.setStatus(status);
+            return toDto(repository.save(consulta));
+        });
+    }
+
     private ConsultaDTO toDto(Consulta consulta) {
         Long medicoId = consulta.getMedico() != null ? consulta.getMedico().getId() : null;
         Long pacienteId = consulta.getPaciente() != null ? consulta.getPaciente().getId() : null;

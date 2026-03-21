@@ -37,6 +37,16 @@ public class MedicoController {
         return ResponseEntity.ok().body(MedicoResponse.toResponse(dto));
     }
 
+    @GetMapping(value = "/busca")
+    @Operation(summary = "Buscar médicos por nome ou CRM", description = "Retorna uma lista de médicos filtrados por nome ou CRM")
+    public ResponseEntity<List<MedicoResponse>> search(@Parameter(description = "Termo de busca") @RequestParam String q) {
+        List<MedicoResponse> list = medicoService.search(q)
+                                                .stream()
+                                                .map(MedicoResponse::toResponse)
+                                                .toList();
+        return ResponseEntity.ok().body(list);
+    }
+
     @GetMapping(value = "/especialidade/{especialidadeId}")
     @Operation(summary = "Filtrar médicos por especialidade", description = "Retorna uma lista de médicos que possuem a especialidade com o ID fornecido")
     public ResponseEntity<List<MedicoResponse>> findByEspecialidade(@Parameter(description = "ID da especialidade a ser filtrada", required = true) @PathVariable Long especialidadeId) {

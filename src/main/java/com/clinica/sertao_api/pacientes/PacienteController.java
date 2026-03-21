@@ -28,6 +28,15 @@ public class PacienteController {
         return ResponseEntity.ok(responses);
     }
 
+    @GetMapping("/busca")
+    @Operation(summary = "Buscar pacientes por nome ou CPF", description = "Retorna uma lista de pacientes filtrados por nome ou CPF")
+    public ResponseEntity<List<PacienteResponse>> search(@RequestParam String q) {
+        List<PacienteResponse> responses = service.search(q).stream()
+                .map(PacienteResponse::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Buscar paciente por ID", description = "Retorna um paciente específico com base no ID fornecido")
     public ResponseEntity<PacienteResponse> findById(@PathVariable Long id) {

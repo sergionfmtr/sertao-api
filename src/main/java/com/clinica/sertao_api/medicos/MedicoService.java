@@ -32,6 +32,12 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
+    public List<MedicoDTO> search(String query) {
+        List<Medico> result = medicoRepository.searchByNomeOrCrm(query);
+        return result.stream().map(MedicoDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public MedicoDTO findById(Integer id) {
         Medico entity = medicoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado"));
         return new MedicoDTO(entity);
