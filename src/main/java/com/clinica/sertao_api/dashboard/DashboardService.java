@@ -49,7 +49,7 @@ public class DashboardService {
         LocalDate hoje = LocalDate.now();
         LocalDateTime inicioDoDia = hoje.atStartOfDay();
         LocalDateTime fimDoDia = hoje.atTime(23, 59, 59);
-        var consultasHoje = consultaService.findAll(null, null, null, inicioDoDia, fimDoDia);
+        var consultasHoje = consultaService.findAll(null, null, null, inicioDoDia, fimDoDia, null);
         long agendamentosHoje = consultasHoje.size();
 
         // Totais gerais
